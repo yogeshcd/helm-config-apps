@@ -1,0 +1,18 @@
+# Default values for api-gateway.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+deployment:
+  name: api-gateway
+  image: val418orant/api-gateway:latest
+
+
+service:
+  type: NodePort
+  port: 9999
+  targetPort: 9999
+  nodePort: 32470
+  name: zuul-api-gateway
+

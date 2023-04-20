@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: offer
+spec:
+  selector:
+    app: offer-ui
+  ports:
+  - port: 1001
+    targetPort: 1001
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: offer-ui
+spec:
+  replica: 1
+  selector:
+    matchLabels:
+      app: offer-ui
+  template:
+    metadata:
+      labels:
+        app: offer-ui
+    spec:
+      containers:
+      - name: offer-ui
+        image: val418orant/offers:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 1001
+

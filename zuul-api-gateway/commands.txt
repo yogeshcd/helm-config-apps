@@ -1,0 +1,2 @@
+docker build -t val418orant/api-gateway:latest .
+docker push val418orant/api-gateway:latest

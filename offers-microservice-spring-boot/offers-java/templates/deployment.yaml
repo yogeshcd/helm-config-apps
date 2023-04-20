@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  labels:
+    {{- include "offers-java.labels" . | nindent 4 }}
+spec:
+  replica: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "offers-java.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "offers-java.selectorLabels" . | nindent 8}}
+    spec:
+      containers:
+      - name: {{ .Values.deployment.imageName }}
+        image: {{ .Values.deployment.image }}
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        ports:
+        - containerPort: {{ .Values.service.targetPort}}

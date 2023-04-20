@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shoe
+  labels:
+    app: shoe-ui
+spec:
+  selector:
+    app: shoe
+  ports:
+  - port: 1002
+    targetPort: 1002
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shoe-ui
+  labels:
+    app: shoe-ui
+spec:
+  replica: 1
+  selector:
+    matchLabels:
+      app: shoe-ui
+  template:
+    metadata:
+      labels:
+        app: shoe-ui
+    spec:
+      containers:
+      - name: shoe-ui
+        image: val418orant/shoes:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 1002

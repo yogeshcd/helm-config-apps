@@ -1,0 +1,18 @@
+# Default values for wishlist-python.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+deployment:
+  name: wishlist-ui
+  containerName: wishlist-ui
+  image: val418orant/wishlist:latest
+
+service:
+  name: wishlist
+  type: ClusterIP
+  port: 1003
+  targetPort: 5000
+
+

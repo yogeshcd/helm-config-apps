@@ -1,0 +1,76 @@
+helm -h
+
+helm create tests
+
+github repo: https://github.com/DeekshithSN/Helm_
+
+charts folder: stores chart dependency e.g. application depending on a db.
+vi Chart.yaml
+dependencies:
+- name: appmesh-controller
+  version: "0.5.0"
+  repository: "https://aws.github.io/eks-charts"
+
+helm envs
+helm get all release-name
+helm get values release-name
+helm get values release-name -a
+
+helm install test test
+helm uninstall test
+helm install test test --set service.type=NodePort
+helm install artifactory-oss --version 2.2.2 --repo https://charts.jforg.io
+helm install my-app --debut --dry-run test/
+
+helm install test test --namespace qa
+helm list --all-namespace
+
+helm lint chart-name
+
+helm history release-name
+helm history release-name -o json
+helm history release-name --max 3
+
+helm package test
+helm package --destination /home/folder/ 
+helm package test --destination /home/folder/ --version 1.2.3  #give it custom version
+
+helm diff
+helm plugin update diff
+helm plugin list
+
+helm pull airflow --version 6.2.0 --repo https://charts.batnami.com/bitnami
+helm pull airflow --version 6.2.0 --repo https://charts.batnami.com/bitnami --untar
+
+helm repo add wso2 https://helm.wso2.com 
+
+helm upgrade my-app test
+
+helm rollback -h
+helm rollback my-app 1
+helm rollback my-app 1 --force
+helm rollback my-app 1 --force --no-hooks
+
+helm search -h
+helm search hub nginx
+helm search nginx 
+
+helm show chart test
+helm show all test
+helm show values chart-name
+
+helm template -h 
+helm template test1 test
+
+helm test my-app
+
+
+
+
+
+git init
+git add README.md
+git commit -m "inception"
+git branch -M main
+git remote add origin https://github.com/yogeshcd/helm-config-apps.git
+git push -u origin main

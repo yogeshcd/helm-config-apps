@@ -1,0 +1,19 @@
+# Default values for shoes-java.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+deployment:
+  name: shoes-ui
+  contianerName: shoes-ui
+  image: val418orant/shoes:latest
+
+service:
+  name: shoe
+  type: ClusterIP
+  port: 1002
+  targetPort: 1002
+
+
+

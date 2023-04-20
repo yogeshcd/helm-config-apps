@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels: 
+    {{- include "cart-nodejs.labels" . | nindent 4}}
+spec:
+  replica: 1
+  selector:
+    matchLabels:
+      {{- include "cart-nodejs.selectorLabels" . | nindent 6}}
+  template:
+    metadata:
+      labels:
+        {{- include "cart-nodejs.selectorLabels" . | nindent 8}}
+    spec:
+      containers:
+      - name: {{ .Values.deployment.contianerName }}
+        image: {{ .Values.deployment.conatinerImage }}
+        imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        ports:
+        - containerPort: {{ .Values.service.targetPort }}

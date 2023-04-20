@@ -1,0 +1,17 @@
+# Default values for ui-reactjs.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+deployment:
+  name: react-ui
+  containerName: react-ui
+  image: val418orant/ui-reactjs:latest
+
+
+service:
+  name: ui-service
+  type: NodePort
+  port: 8080
+  targetPort: 8080

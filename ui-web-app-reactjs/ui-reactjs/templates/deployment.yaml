@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "ui-reactjs.labels" . | nindent 4}}
+  name: {{ .Values.deployment.name }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "ui-reactjs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "ui-reactjs.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Values.deployment.containerName }}
+        image: {{ .Values.deployment.image }}
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        ports:
+        - containerPort: {{ .Values.service.targetPort }}

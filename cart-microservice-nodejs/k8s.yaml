@@ -1,0 +1,38 @@
+# create a deployment
+# create service
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-nodejs-ui
+spec:
+  selector:
+    app: cart-nodejs-ui
+  ports:
+  - port: 1004
+    targetPort: 1004
+    name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart-nodejs-ui
+spec:
+  replica: 1
+  selector:
+    matchLabels:
+      app: cart-nodejs-ui
+  template:
+    metadata:
+      labels:
+        app: cart-nodejs-ui
+    spec:
+      containers:
+      - name: cart-nodejs-image-ui
+        image: cart-nodejs-image:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 1004
